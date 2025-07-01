@@ -4,7 +4,7 @@
   "private": true,
   "type": "module",
   "scripts": {
-    "dev": "uv run uvicorn app.main:app --reload --port 5001",
+    "dev": "uv run uvicorn app.main:app --reload --host 0.0.0.0 --port 5001",
     "start": "uv run uvicorn app.main:app --port 5001",
     "db:push": "prisma db push",
     "db:migrate": "prisma migrate dev",
