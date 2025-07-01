@@ -75,3 +75,40 @@ class CoffeeResponse(CoffeeBase):
 class CoffeeWithCategory(CoffeeResponse):
     """Coffee response with category details."""
     category: CategoryResponse
+
+
+class CategoryCreateRequest(BaseModel):
+    """Request for creating a category."""
+    id: str = Field(..., description="Category ID")
+    name: str
+    description: Optional[str] = None
+    sortOrder: int = Field(default=0, ge=0)
+    active: bool = True
+
+
+class CategoryUpdateRequest(BaseModel):
+    """Request for updating a category."""
+    name: Optional[str] = None
+    description: Optional[str] = None
+    sortOrder: Optional[int] = Field(None, ge=0)
+    active: Optional[bool] = None
+
+
+class CoffeeCreateRequest(BaseModel):
+    """Request for creating a coffee item."""
+    name: str = Field(..., example="卡布奇诺")
+    description: str = Field(..., example="经典意式咖啡，奶泡绵密")
+    price: float = Field(..., gt=0, example=25.00)
+    categoryId: str
+    available: bool = True
+    imageUrl: Optional[str] = Field(None, example="/images/cappuccino.jpg")
+
+
+class CoffeeUpdateRequest(BaseModel):
+    """Request for updating a coffee item."""
+    name: Optional[str] = None
+    description: Optional[str] = None
+    price: Optional[float] = Field(None, gt=0)
+    categoryId: Optional[str] = None
+    available: Optional[bool] = None
+    imageUrl: Optional[str] = None

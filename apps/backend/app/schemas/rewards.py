@@ -1,9 +1,10 @@
 """
 Rewards-related schemas.
 """
-from typing import Optional
+from typing import Optional, List
 from pydantic import BaseModel, Field
 from datetime import datetime
+from .order import CoffeeSize
 
 
 class RewardsBase(BaseModel):
@@ -41,3 +42,17 @@ class RewardsTransaction(BaseModel):
     type: str = Field(..., pattern="^(EARNED|REDEEMED)$")
     description: str
     orderId: Optional[str] = None
+
+
+class RewardsRedeemRequest(BaseModel):
+    """Request for redeeming rewards."""
+    coffeeId: str
+    size: CoffeeSize = CoffeeSize.MEDIUM
+
+
+class RewardsHistoryResponse(BaseModel):
+    """Response for rewards history."""
+    history: List[dict]
+    totalEarned: int
+    totalRedeemed: int
+    currentBalance: int
