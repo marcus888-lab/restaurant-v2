@@ -1,10 +1,12 @@
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
+from fastapi.staticfiles import StaticFiles
 from fastapi.exceptions import RequestValidationError
 from starlette.exceptions import HTTPException as StarletteHTTPException
 from prisma.errors import PrismaError
 from contextlib import asynccontextmanager
 import logging
+import os
 
 from app.core.database import connect_db, disconnect_db
 from app.core.config import settings
@@ -80,6 +82,14 @@ async def health_check():
         "service": "coffee-shop-api",
         "database": db_status
     }
+
+# Mount static files directory
+static_dir = os.path.join(os.path.dirname(os.path.dirname(__file__)), "static")
+if os.path.exists(static_dir):
+    app.mount("/static", StaticFiles(directory=static_dir), name="static")
+    logger.info(f"Static files mounted from: {static_dir}")
+else:
+    logger.warning(f"Static directory not found: {static_dir}")
 
 # Include API routes
 app.include_router(api_router)
