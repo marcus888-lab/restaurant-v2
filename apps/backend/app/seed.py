@@ -11,13 +11,6 @@ import sys
 # Seed data
 CATEGORIES = [
     {
-        "id": "all",
-        "name": "所有",
-        "description": "所有咖啡",
-        "sortOrder": 0,
-        "active": True
-    },
-    {
         "id": "espresso",
         "name": "浓缩咖啡",
         "description": "意式浓缩咖啡系列",
@@ -55,7 +48,7 @@ COFFEE_ITEMS = [
         "price": 25.00,
         "categoryId": "espresso",
         "available": True,
-        "imageUrl": "/images/cappuccino.jpg"
+        "imageUrl": "/static/images/cappuccino.jpg"
     },
     {
         "name": "拿铁咖啡",
@@ -63,7 +56,7 @@ COFFEE_ITEMS = [
         "price": 28.00,
         "categoryId": "espresso",
         "available": True,
-        "imageUrl": "/images/latte.jpg"
+        "imageUrl": "/static/images/latte.jpg"
     },
     {
         "name": "摩卡咖啡",
@@ -71,7 +64,7 @@ COFFEE_ITEMS = [
         "price": 30.00,
         "categoryId": "espresso",
         "available": True,
-        "imageUrl": "/images/mocha.jpg"
+        "imageUrl": "/static/images/mocha.jpg"
     },
     {
         "name": "焦糖玛奇朵",
@@ -79,7 +72,7 @@ COFFEE_ITEMS = [
         "price": 32.00,
         "categoryId": "espresso",
         "available": True,
-        "imageUrl": "/images/caramel-macchiato.jpg"
+        "imageUrl": "/static/images/caramel-macchiato.jpg"
     },
     {
         "name": "馥芮白",
@@ -87,7 +80,7 @@ COFFEE_ITEMS = [
         "price": 26.00,
         "categoryId": "espresso",
         "available": True,
-        "imageUrl": "/images/flat-white.jpg"
+        "imageUrl": "/static/images/flat-white.jpg"
     },
     
     # Filter coffee category
@@ -97,7 +90,7 @@ COFFEE_ITEMS = [
         "price": 35.00,
         "categoryId": "filter",
         "available": True,
-        "imageUrl": "/images/pour-over.jpg"
+        "imageUrl": "/static/images/pour-over.jpg"
     },
     {
         "name": "美式咖啡",
@@ -105,7 +98,7 @@ COFFEE_ITEMS = [
         "price": 22.00,
         "categoryId": "filter",
         "available": True,
-        "imageUrl": "/images/americano.jpg"
+        "imageUrl": "/static/images/americano.jpg"
     },
     
     # Cold brew category
@@ -115,7 +108,7 @@ COFFEE_ITEMS = [
         "price": 28.00,
         "categoryId": "coldbrew",
         "available": True,
-        "imageUrl": "/images/cold-brew.jpg"
+        "imageUrl": "/static/images/cold-brew.jpg"
     },
     {
         "name": "冰拿铁",
@@ -123,7 +116,7 @@ COFFEE_ITEMS = [
         "price": 30.00,
         "categoryId": "coldbrew",
         "available": True,
-        "imageUrl": "/images/iced-latte.jpg"
+        "imageUrl": "/static/images/iced-latte.jpg"
     },
     
     # Specialty category
@@ -133,7 +126,7 @@ COFFEE_ITEMS = [
         "price": 32.00,
         "categoryId": "specialty",
         "available": True,
-        "imageUrl": "/images/matcha-latte.jpg"
+        "imageUrl": "/static/images/matcha-latte.jpg"
     },
     {
         "name": "芋头拿铁",
@@ -141,7 +134,7 @@ COFFEE_ITEMS = [
         "price": 30.00,
         "categoryId": "specialty",
         "available": True,
-        "imageUrl": "/images/taro-latte.jpg"
+        "imageUrl": "/static/images/taro-latte.jpg"
     },
     {
         "name": "红色天鹅绒拿铁",
@@ -149,7 +142,7 @@ COFFEE_ITEMS = [
         "price": 34.00,
         "categoryId": "specialty",
         "available": True,
-        "imageUrl": "/images/red-velvet-latte.jpg"
+        "imageUrl": "/static/images/red-velvet-latte.jpg"
     }
 ]
 

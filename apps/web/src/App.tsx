@@ -3,6 +3,10 @@ import { useAuth } from '@clerk/clerk-react'
 import { SignInPage } from './components/auth/SignInPage'
 import { SignUpPage } from './components/auth/SignUpPage'
 import { ProtectedRoute } from './components/auth/ProtectedRoute'
+import { HomePage } from './pages/HomePage'
+import { OrdersPage } from './pages/OrdersPage'
+import { RewardsPage } from './pages/RewardsPage'
+import { ProfilePage } from './pages/ProfilePage'
 import { Dashboard } from './pages/Dashboard'
 
 function App() {
@@ -22,14 +26,46 @@ function App() {
         {/* Public routes */}
         <Route 
           path="/sign-in" 
-          element={isSignedIn ? <Navigate to="/dashboard" replace /> : <SignInPage />} 
+          element={isSignedIn ? <Navigate to="/home" replace /> : <SignInPage />} 
         />
         <Route 
           path="/sign-up" 
-          element={isSignedIn ? <Navigate to="/dashboard" replace /> : <SignUpPage />} 
+          element={isSignedIn ? <Navigate to="/home" replace /> : <SignUpPage />} 
         />
         
         {/* Protected routes */}
+        <Route 
+          path="/home" 
+          element={
+            <ProtectedRoute>
+              <HomePage />
+            </ProtectedRoute>
+          } 
+        />
+        <Route 
+          path="/orders" 
+          element={
+            <ProtectedRoute>
+              <OrdersPage />
+            </ProtectedRoute>
+          } 
+        />
+        <Route 
+          path="/rewards" 
+          element={
+            <ProtectedRoute>
+              <RewardsPage />
+            </ProtectedRoute>
+          } 
+        />
+        <Route 
+          path="/profile" 
+          element={
+            <ProtectedRoute>
+              <ProfilePage />
+            </ProtectedRoute>
+          } 
+        />
         <Route 
           path="/dashboard" 
           element={
@@ -42,13 +78,13 @@ function App() {
         {/* Default redirect */}
         <Route 
           path="/" 
-          element={<Navigate to={isSignedIn ? "/dashboard" : "/sign-in"} replace />} 
+          element={<Navigate to={isSignedIn ? "/home" : "/sign-in"} replace />} 
         />
         
         {/* Catch all route */}
         <Route 
           path="*" 
-          element={<Navigate to={isSignedIn ? "/dashboard" : "/sign-in"} replace />} 
+          element={<Navigate to={isSignedIn ? "/home" : "/sign-in"} replace />} 
         />
       </Routes>
     </Router>
