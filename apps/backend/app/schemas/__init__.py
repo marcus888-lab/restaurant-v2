@@ -24,7 +24,11 @@ from .coffee import (
     CoffeeCreate,
     CoffeeUpdate,
     CoffeeResponse,
-    CoffeeWithCategory
+    CoffeeWithCategory,
+    CategoryCreateRequest,
+    CategoryUpdateRequest,
+    CoffeeCreateRequest,
+    CoffeeUpdateRequest
 )
 from .order import (
     OrderStatus,
@@ -37,21 +41,30 @@ from .order import (
     OrderCreate,
     OrderUpdate,
     OrderResponse,
-    OrderListResponse
+    OrderListResponse,
+    OrderDetailResponse,
+    OrderItemDetailResponse,
+    OrderCreateRequest,
+    OrderItemRequest,
+    OrderUpdateStatus
 )
 from .review import (
     ReviewBase,
     ReviewCreate,
     ReviewUpdate,
     ReviewResponse,
-    ReviewWithUser
+    ReviewWithUser,
+    ReviewCreateRequest,
+    ReviewUpdateRequest
 )
 from .rewards import (
     RewardsBase,
     RewardsCreate,
     RewardsUpdate,
     RewardsResponse,
-    RewardsTransaction
+    RewardsTransaction,
+    RewardsRedeemRequest,
+    RewardsHistoryResponse
 )
 from .payment import (
     PaymentMethod,
@@ -85,6 +98,10 @@ __all__ = [
     "CoffeeUpdate",
     "CoffeeResponse",
     "CoffeeWithCategory",
+    "CategoryCreateRequest",
+    "CategoryUpdateRequest",
+    "CoffeeCreateRequest",
+    "CoffeeUpdateRequest",
     # Order
     "OrderStatus",
     "OrderType",
@@ -97,18 +114,27 @@ __all__ = [
     "OrderUpdate",
     "OrderResponse",
     "OrderListResponse",
+    "OrderDetailResponse",
+    "OrderItemDetailResponse",
+    "OrderCreateRequest",
+    "OrderItemRequest",
+    "OrderUpdateStatus",
     # Review
     "ReviewBase",
     "ReviewCreate",
     "ReviewUpdate",
     "ReviewResponse",
     "ReviewWithUser",
+    "ReviewCreateRequest",
+    "ReviewUpdateRequest",
     # Rewards
     "RewardsBase",
     "RewardsCreate",
     "RewardsUpdate",
     "RewardsResponse",
     "RewardsTransaction",
+    "RewardsRedeemRequest",
+    "RewardsHistoryResponse",
     # Payment
     "PaymentMethod",
     "PaymentStatus",

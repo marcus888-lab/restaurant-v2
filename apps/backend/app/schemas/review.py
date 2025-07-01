@@ -39,3 +39,16 @@ class ReviewWithUser(ReviewResponse):
     """Review with user details."""
     userName: str
     userEmail: str
+
+
+class ReviewCreateRequest(BaseModel):
+    """Request for creating a review."""
+    coffeeId: str
+    rating: int = Field(..., ge=1, le=5)
+    comment: Optional[str] = Field(None, max_length=1000)
+
+
+class ReviewUpdateRequest(BaseModel):
+    """Request for updating a review."""
+    rating: int = Field(..., ge=1, le=5)
+    comment: Optional[str] = Field(None, max_length=1000)

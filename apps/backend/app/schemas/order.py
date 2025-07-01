@@ -1,7 +1,8 @@
 """
 Order-related schemas.
 """
-from typing import List, Optional
+from __future__ import annotations
+from typing import List, Optional, Dict, Any
 from pydantic import BaseModel, Field
 from datetime import datetime
 from enum import Enum
@@ -45,8 +46,7 @@ class OrderItemResponse(OrderItemBase):
     id: str
     price: float
     
-    class Config:
-        from_attributes = True
+    model_config = {"from_attributes": True}
 
 
 class OrderBase(BaseModel):
@@ -82,8 +82,7 @@ class OrderResponse(BaseModel):
     createdAt: datetime
     updatedAt: datetime
     
-    class Config:
-        from_attributes = True
+    model_config = {"from_attributes": True}
 
 
 class OrderListResponse(BaseModel):
@@ -96,5 +95,40 @@ class OrderListResponse(BaseModel):
     itemCount: int
     createdAt: datetime
     
-    class Config:
-        from_attributes = True
+    model_config = {"from_attributes": True}
+
+
+class OrderItemDetailResponse(OrderItemResponse):
+    """Order item with coffee details."""
+    coffee: Optional[Dict[str, Any]] = None
+    
+    model_config = {"from_attributes": True}
+
+
+class OrderDetailResponse(OrderResponse):
+    """Detailed order response with all relations."""
+    user: Optional[Dict[str, Any]] = None
+    orderItems: List[OrderItemDetailResponse] = []
+    payment: Optional[Dict[str, Any]] = None
+    
+    model_config = {"from_attributes": True}
+
+
+class OrderCreateRequest(BaseModel):
+    """Request for creating an order."""
+    items: List['OrderItemRequest'] = Field(..., min_items=1)
+    type: OrderType = OrderType.PICKUP
+    notes: Optional[str] = Field(None, max_length=1000)
+
+
+class OrderItemRequest(BaseModel):
+    """Individual item in order creation request."""
+    coffeeId: str
+    quantity: int = Field(..., ge=1)
+    size: CoffeeSize = CoffeeSize.MEDIUM
+    notes: Optional[str] = Field(None, max_length=500)
+
+
+class OrderUpdateStatus(BaseModel):
+    """Request for updating order status."""
+    status: OrderStatus
