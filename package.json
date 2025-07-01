@@ -1,0 +1,35 @@
+{
+  "name": "coffee-shop",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Coffee Shop Monorepo - Landing, Web App, Admin Dashboard, and Backend",
+  "scripts": {
+    "dev": "pnpm -r --parallel --filter='./apps/**' dev",
+    "dev:landing": "pnpm --filter landing dev",
+    "dev:web": "pnpm --filter web dev",
+    "dev:admin": "pnpm --filter admin dev",
+    "dev:backend": "pnpm --filter backend dev",
+    "build": "pnpm build:packages && pnpm -r --filter='./apps/**' build",
+    "build:packages": "pnpm -r --filter='./packages/**' build",
+    "build:landing": "pnpm --filter landing build",
+    "build:web": "pnpm --filter web build",
+    "build:admin": "pnpm --filter admin build",
+    "lint": "pnpm -r lint",
+    "format": "prettier --write \"**/*.{ts,tsx,js,jsx,json,css,md}\"",
+    "typecheck": "pnpm -r typecheck",
+    "clean": "pnpm -r clean && rm -rf node_modules",
+    "db:start": "./scripts/db-start.sh",
+    "db:stop": "./scripts/db-stop.sh",
+    "db:reset": "./scripts/db-reset.sh"
+  },
+  "devDependencies": {
+    "@types/node": "^20.10.0",
+    "prettier": "^3.1.0",
+    "typescript": "^5.3.0"
+  },
+  "engines": {
+    "node": ">=18.0.0",
+    "pnpm": ">=8.0.0"
+  },
+  "packageManager": "pnpm@8.14.0"
+}

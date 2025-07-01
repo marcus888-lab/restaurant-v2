@@ -1,0 +1,185 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+generator client {
+  provider = "prisma-client-py"
+  interface = "asyncio"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+enum UserRole {
+  CUSTOMER
+  ADMIN
+  STAFF
+}
+
+enum OrderStatus {
+  PENDING
+  CONFIRMED
+  PREPARING
+  READY
+  COMPLETED
+  CANCELLED
+}
+
+enum OrderType {
+  PICKUP
+  DELIVERY
+}
+
+enum CoffeeSize {
+  SMALL
+  MEDIUM
+  LARGE
+}
+
+enum PaymentMethod {
+  CREDIT_CARD
+  DEBIT_CARD
+  ALIPAY
+  WECHAT_PAY
+}
+
+enum PaymentStatus {
+  PENDING
+  COMPLETED
+  FAILED
+  REFUNDED
+}
+
+model User {
+  id        String   @id @default(cuid())
+  clerkId   String   @unique
+  email     String   @unique
+  name      String?
+  phone     String?
+  role      UserRole @default(CUSTOMER)
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  orders  Order[]
+  reviews Review[]
+  rewards Rewards?
+
+  @@index([clerkId])
+  @@index([email])
+}
+
+model Category {
+  id          String   @id @default(cuid())
+  name        String
+  description String?
+  sortOrder   Int      @default(0)
+  active      Boolean  @default(true)
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+
+  coffees Coffee[]
+
+  @@index([active])
+}
+
+model Coffee {
+  id          String   @id @default(cuid())
+  categoryId  String
+  name        String
+  description String?
+  price       Decimal  @db.Decimal(10, 2)
+  available   Boolean  @default(true)
+  imageUrl    String?
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+
+  category   Category     @relation(fields: [categoryId], references: [id])
+  orderItems OrderItem[]
+  reviews    Review[]
+
+  @@index([categoryId])
+  @@index([available])
+}
+
+model Order {
+  id          String      @id @default(cuid())
+  userId      String
+  orderNumber String      @unique
+  subtotal    Decimal     @db.Decimal(10, 2)
+  tax         Decimal     @db.Decimal(10, 2)
+  total       Decimal     @db.Decimal(10, 2)
+  status      OrderStatus @default(PENDING)
+  type        OrderType   @default(PICKUP)
+  createdAt   DateTime    @default(now())
+  updatedAt   DateTime    @updatedAt
+
+  user       User        @relation(fields: [userId], references: [id])
+  orderItems OrderItem[]
+  payment    Payment?
+
+  @@index([userId])
+  @@index([status])
+  @@index([orderNumber])
+}
+
+model OrderItem {
+  id       String     @id @default(cuid())
+  orderId  String
+  coffeeId String
+  quantity Int
+  price    Decimal    @db.Decimal(10, 2)
+  size     CoffeeSize @default(MEDIUM)
+  notes    String?
+
+  order  Order  @relation(fields: [orderId], references: [id])
+  coffee Coffee @relation(fields: [coffeeId], references: [id])
+
+  @@index([orderId])
+  @@index([coffeeId])
+}
+
+model Payment {
+  id            String        @id @default(cuid())
+  orderId       String        @unique
+  amount        Decimal       @db.Decimal(10, 2)
+  method        PaymentMethod
+  status        PaymentStatus @default(PENDING)
+  transactionId String?
+  createdAt     DateTime      @default(now())
+  updatedAt     DateTime      @updatedAt
+
+  order Order @relation(fields: [orderId], references: [id])
+
+  @@index([status])
+}
+
+model Review {
+  id        String   @id @default(cuid())
+  userId    String
+  coffeeId  String
+  rating    Int
+  comment   String?
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  user   User   @relation(fields: [userId], references: [id])
+  coffee Coffee @relation(fields: [coffeeId], references: [id])
+
+  @@unique([userId, coffeeId])
+  @@index([coffeeId])
+  @@index([rating])
+}
+
+model Rewards {
+  id            String   @id @default(cuid())
+  userId        String   @unique
+  currentPoints Int      @default(0)
+  totalEarned   Int      @default(0)
+  totalRedeemed Int      @default(0)
+  lastUpdated   DateTime @updatedAt
+
+  user User @relation(fields: [userId], references: [id])
+
+  @@index([userId])
+}

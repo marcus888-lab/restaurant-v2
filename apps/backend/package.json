@@ -1,0 +1,21 @@
+{
+  "name": "backend",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "dev": "uv run uvicorn app.main:app --reload --port 5001",
+    "start": "uv run uvicorn app.main:app --port 5001",
+    "db:push": "prisma db push",
+    "db:migrate": "prisma migrate dev",
+    "db:generate": "prisma generate",
+    "db:seed": "uv run python -m app.seed",
+    "install:python": "uv pip install -r requirements.txt",
+    "typecheck": "echo 'Python backend - no TypeScript'",
+    "clean": "rm -rf __pycache__ .pytest_cache"
+  },
+  "dependencies": {
+    "prisma": "^5.7.0",
+    "@prisma/client": "^5.7.0"
+  }
+}

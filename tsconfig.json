@@ -1,0 +1,32 @@
+{
+  "compilerOptions": {
+    "target": "ES2022",
+    "lib": ["ES2022", "DOM", "DOM.Iterable"],
+    "module": "ESNext",
+    "skipLibCheck": true,
+    "moduleResolution": "bundler",
+    "allowImportingTsExtensions": true,
+    "resolveJsonModule": true,
+    "isolatedModules": true,
+    "noEmit": true,
+    "jsx": "react-jsx",
+    "strict": true,
+    "noUnusedLocals": true,
+    "noUnusedParameters": true,
+    "noFallthroughCasesInSwitch": true,
+    "allowSyntheticDefaultImports": true,
+    "esModuleInterop": true,
+    "forceConsistentCasingInFileNames": true,
+    "baseUrl": ".",
+    "paths": {
+      "@coffee-shop/ui": ["./packages/ui/src"],
+      "@coffee-shop/ui/*": ["./packages/ui/src/*"],
+      "@coffee-shop/types": ["./packages/types/src"],
+      "@coffee-shop/types/*": ["./packages/types/src/*"],
+      "@coffee-shop/utils": ["./packages/utils/src"],
+      "@coffee-shop/utils/*": ["./packages/utils/src/*"]
+    }
+  },
+  "include": ["apps/**/*", "packages/**/*"],
+  "exclude": ["node_modules", "dist", "build", ".next", "out"]
+}
