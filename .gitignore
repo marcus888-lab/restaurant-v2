@@ -14,6 +14,8 @@ build/
 
 # Production
 dist/
+build/
+*.tgz
 
 # Misc
 .DS_Store
@@ -66,3 +68,56 @@ __pycache__/
 *.pyo
 *.pyd
 .Python
+
+# TypeScript
+*.tsbuildinfo
+
+# Build outputs
+lib/
+es/
+umd/
+cjs/
+esm/
+*.d.ts.map
+
+# Temporary files
+.tmp/
+.temp/
+*.tmp
+*.temp
+
+# Package manager lock files (optional - uncomment if needed)
+# package-lock.json
+# yarn.lock
+# pnpm-lock.yaml
+
+# Storybook
+.storybook/
+storybook-static/
+
+# Cache directories
+.cache/
+.parcel-cache/
+.eslintcache
+
+# Runtime data
+pids/
+*.pid
+*.seed
+*.pid.lock
+
+# Optional npm cache directory
+.npm
+
+# Optional eslint cache
+.eslintcache
+
+# Playwright
+test-results/
+playwright-report/
+playwright/.cache/
+
+# MacOS
+.DS_Store
+.AppleDouble
+.LSOverride
